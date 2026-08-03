@@ -1,6 +1,6 @@
 name: 'Claude Code session'
 description: >
-  Resume the Claude Code session an earlier run of this workflow left on this work item, and save this run's session when the job finishes.
+  Resume the Claude Code session an earlier run left on this work item, and save this run's session when the job ends.
 
 inputs:
   scope:
