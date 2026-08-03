@@ -24,7 +24,7 @@ jobs:
 
       - name: Restore the Claude session for this PR
         id: session
-        uses: CVector-Energy/claude-code-session@v1
+        uses: CVector-Energy/claude-code-session@v0.1.1
         with:
           scope: pr-${{ github.event.pull_request.number }}
 
@@ -37,6 +37,8 @@ jobs:
 ```
 
 One step, declared before the agent. There is nothing to add after it and nothing to add for a job that fails: the save is a post step that runs either way, and it finds this run's session itself.
+
+There is no floating `v1` tag to track, deliberately: this action reads your Claude session and writes your Actions cache, so a tag that can be repointed under you is the wrong thing to depend on. Pin a release tag as above, or a full commit sha — which is what the repositories that use it do.
 
 ## Inputs
 
