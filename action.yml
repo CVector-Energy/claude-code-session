@@ -1,0 +1,31 @@
+name: 'Claude Code session'
+description: >
+  Resume the Claude Code session an earlier run of this workflow left on this work item, and save this run's session when the job finishes.
+
+inputs:
+  scope:
+    description: >
+      Work item the session belongs to — "pr-<number>" for a review workflow, "issue-<number>" for an issue workflow. Never a branch: two pull requests are two work items, and so are two workflows acting on one pull request.
+    required: true
+
+outputs:
+  resume-args:
+    description: >
+      "--resume <id>" when this work item's own session was restored and is resumable, otherwise an empty string. Append verbatim to the agent's arguments.
+  session-id:
+    description: The session id the agent will resume, or empty when it starts fresh.
+  resumed:
+    description: '"true" when a session was restored and the agent will continue it.'
+
+# A JavaScript action rather than a composite one, so that it can declare its own
+# post step: the caller declares the work item once and the save happens on the
+# way out, including when the job failed.
+runs:
+  using: node24
+  main: dist/restore.mjs
+  post: dist/save.mjs
+  post-if: always()
+
+branding:
+  icon: rotate-ccw
+  color: orange
