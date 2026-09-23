@@ -32,7 +32,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          claude_args: --model claude-opus-5 ${{ steps.session.outputs.resume-args }}
+          claude_args: --model claude-opus-5-5 ${{ steps.session.outputs.resume-args }}
           prompt: Address the review comments.
 ```
 
